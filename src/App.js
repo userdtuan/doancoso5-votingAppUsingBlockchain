@@ -125,12 +125,12 @@ const App = () => {
   };
   const updateButtonState = async () => {
     if(electArr){
-      console.log("calllllllled")
+      // console.log("calllllllled") 
       console.log(electArr[electID].voted+"---"+electArr[electID].expired)
-      if(electArr[electID].voted===false&&electArr[electID].expired===false){
-        setVisibleBtn("visible")
-      }
-      else setVisibleBtn("invisible")
+      // if(electArr[electID].voted===false&&electArr[electID].expired===false){
+      //   setVisibleBtn("visible")
+      // }
+      // else setVisibleBtn("invisible")
     }
   };
   /////////////////////////////////////////////////////
@@ -299,7 +299,7 @@ const App = () => {
       // console.log(bn)
       if (an.localeCompare(bn) === 0) {
         return true;
-        console.log(" Getiiiiiiin");
+        // console.log(" Getiiiiiiin");
       } else return false;
     }
   };
@@ -440,7 +440,7 @@ const App = () => {
                     style={{ marginLeft: "3px" }}
                     onClick={() => {
                       setNone(!none);
-                      styleBtn == "btn-warning"
+                      styleBtn === "btn-warning"
                         ? setStyleBtn("btn-outline-warning")
                         : setStyleBtn("btn-warning");
                     }}
