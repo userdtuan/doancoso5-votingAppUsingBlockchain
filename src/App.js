@@ -99,7 +99,7 @@ const App = () => {
   useEffect(() => {
     if (electID && contract) {
       updateListCan();
-      updateButtonState();
+      // updateButtonState();
     }
   }, [electID, contract, currentElect, electArr]);
 
@@ -123,14 +123,18 @@ const App = () => {
     let tempContract = new ethers.Contract(contractAddress, abi, tempSigner);
     setContract(tempContract);
   };
-  const updateButtonState = async () => {
-    if(electArr){
-      // console.log("calllllllled") 
-      console.log(electArr[electID].voted+"---"+electArr[electID].expired)
-      // if(electArr[electID].voted===false&&electArr[electID].expired===false){
-      //   setVisibleBtn("visible")
-      // }
-      // else setVisibleBtn("invisible")
+  const handleChangeButtonState =  () => {
+    if (checkIfYours(electArr[electID - 1]) && !electArr[electID - 1].expired) {
+      console.log("Can set Expired");
+      setVisibleBtnExpired("");
+    } else {
+      setVisibleBtnExpired("invisible");
+    }
+    if (!electArr[electID - 1].voted && !electArr[electID - 1].expired) {
+      console.log("Can set Expired");
+      setVisibleBtn("");
+    } else {
+      setVisibleBtn("invisible");
     }
   };
   /////////////////////////////////////////////////////
@@ -183,9 +187,9 @@ const App = () => {
       election_list.push(election);
     }
     setElectArr(election_list);
-    if(electID){
-      setCurrentElect(election_list[electID])
-    }
+    // if(electID){
+    //   setCurrentElect(election_list[electID])
+    // }
   };
   const handleAddMoreCan = () => {
     setTempCanArr((tempCanArr) => [
@@ -234,21 +238,24 @@ const App = () => {
     console.log(`electID changed to ${electID}`);
     console.log(`currentElect changed to ${currentElect}`);
   }, [electID, currentElect]);
+  // action to handle election list and currentID change
+  useEffect(()=>{
+    if(electID){
+      setCurrentElect(electArr[electID-1])
+      handleChangeButtonState()
+      // setVisibleBtn
+    }
+  },[electArr,electID])
   const handleElectIDChange = async (value) => {
     if (electArr) {
       setElectID(value);
       setCurrentElect(electArr[value - 1]);
       console.log("yours? " + checkIfYours(electArr[value - 1]));
       // setExpired(electArr[value - 1].expired);
-      if (checkIfYours(electArr[value - 1]) && !electArr[value - 1].expired) {
-        console.log("Can set Expired");
-        setVisibleBtnExpired("");
-      } else {
-        setVisibleBtnExpired("invisible");
-      }
       console.log(electArr[value - 1]);
     }
   };
+
   const VotedStateBtn = () => {
     // console.log(`show ${voted} and ${electID}`)
 
@@ -452,12 +459,13 @@ const App = () => {
                     className={`btn ${styleBtn} btn-sm`}
                     style={{ marginLeft: "3px" }}
                     onClick={async() => {
-                      await contract.create_new_election("testName", "electDes", ["arr_name1","arr_name2"], ["arr_des1","arr_des2"]);
+                      let time_tail = new Date().toLocaleString().replace(",","").replace(/:.. /," ");
+                      await contract.create_new_election("Test "+time_tail, "Description "+time_tail, ["Option1 "+time_tail,"Option2 "+time_tail], ["Created on "+time_tail,"Created on "+time_tail]);
                     }}
                   >
                     quickly add
                   </button>
-                  <button
+                  {/* <button
                     type="button"
                     className={`btn ${styleBtn} btn-sm`}
                     style={{ marginLeft: "3px" }}
@@ -466,7 +474,7 @@ const App = () => {
                     }}
                   >
                     quickly add
-                  </button>
+                  </button> */}
                 </div>
                 <div className="mh-100 overflow-auto">
                   <TableLeft

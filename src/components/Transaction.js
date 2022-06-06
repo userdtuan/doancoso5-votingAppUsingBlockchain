@@ -152,7 +152,7 @@ export default function Transaction(props) {
               </div>
               <div className="ml-auto p-2 row">
                 <h5 style={{ color: colorText, fontSize:"25px" }}>
-                  [{props.transaction.function_name}]
+                  [{props.transaction.function_name.replaceAll("_"," ")}]
                 </h5>
               </div>
             </div>
@@ -208,7 +208,7 @@ export default function Transaction(props) {
                 Action :
                 <span className={`badge ${colorBtn}`} style={{ fontStyle: "italic", fontSize:"15px" }}>
                   {" "}
-                  {props.transaction.function_name}
+                  {props.transaction.function_name.replaceAll("_"," ")}
                 </span>
               </p>
             </div>
