@@ -1,3 +1,10 @@
+Tuan'note:
+    - The first thing to do is connect your metamask wallet to the app
+    - Next, you have to go to remix ide and deloy your solidity code to ganache, then copy the address to src/contracts/remixAddress.js
+    - If there is any changes from solidity code, you have also replace the abi of the new version of your solidity code to src/contracts/abi.json
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

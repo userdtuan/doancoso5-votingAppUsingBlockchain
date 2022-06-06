@@ -1,4 +1,5 @@
 // import './App.css';
+import REMIX_ADDRESS from "./contracts/remixAddress";
 import Candidate from "./components/Candidate";
 import Pie_Chart from "./components/PieChart";
 import TableLeft from "./components/TableLeft";
@@ -10,7 +11,7 @@ import moment from "moment";
 
 const App = () => {
   // deploy simple storage contract and paste deployed contract address here. This value is local ganache chain
-  let contractAddress = "0xEc986f826009831DDD6D152F38d11D1fccB516Fb";
+  let contractAddress = REMIX_ADDRESS;
 
   const [errorMessage, setErrorMessage] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null);
